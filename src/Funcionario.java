@@ -4,12 +4,13 @@ public class Funcionario {
     private double salario;
     public static int numFuncionarios=0;
 
-    Funcionario(String nome, String cpf, double salario, Financeiro financeiro){
+    Funcionario(String nome, String cpf, double salario, Financeiro financeiro, Login login){
         this.nome = nome;
         this.cpf = cpf;
         this.salario = salario;
         controleFuncionario();
         financeiro.adicionarFuncionario(this);
+        login.cadastrarUser(this.nome);
     }
 
     public String getNome(){
