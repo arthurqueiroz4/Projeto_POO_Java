@@ -1,4 +1,12 @@
-public class CadastroProduto {
-    Produto produto;
-    Estoque estoque;
+public class CadastroProduto {;
+    private String nomeProduto;
+    private double precoUnitario;
+    private String codigoBarra;
+
+    CadastroProduto(String nomeProduto, double precoUnitario, String codigoBarra, Estoque estoque){
+        this.nomeProduto = nomeProduto;
+        this.precoUnitario = precoUnitario;
+        this.codigoBarra = codigoBarra;
+        estoque.produtos.add(0, nomeProduto);
+    }
 }
