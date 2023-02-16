@@ -9,4 +9,15 @@ public class CadastroProduto {;
         this.codigoBarra = codigoBarra;
         estoque.produtos.add(0, nomeProduto);
     }
+    
+    public double getPrecoUnitario(){
+        return this.precoUnitario;
+    }
+    public String getCodigoBarra(){
+        return this.codigoBarra;
+    }
+    public String getNomeProduto(){
+        return this.nomeProduto;
+    }
+    
 }
