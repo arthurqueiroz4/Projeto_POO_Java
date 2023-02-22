@@ -19,7 +19,7 @@ public class Principal {
         Funcionario operador4 = new Funcionario("Silva", "000.010.000-02", 1250, financeiro, login);
         
         //Folha de pagamento em reais
-        System.out.println(financeiro.getFolhaPagamento());
+        //System.out.println(financeiro.getFolhaPagamento());
         
        //Trocar senha do usuario 
        //login.trocarSenha(operador4, "123");
@@ -27,15 +27,19 @@ public class Principal {
         //Dados dos Funcionarios:
         //financeiro.dadosFolhaPagamento();
         
-        if(login.validaLogin("Arthur", "default")){
-            System.out.println("Login Aceito");
-        } else {
-            System.out.println("Login negado");
-        }
+        //Valida login
+        // if(login.validaLogin("Arthur", "default")){
+        //     System.out.println("Login Aceito");
+        // } else {
+        //     System.out.println("Login negado");
+        // }
 
         //Mostra todos os usuarios cadastrados e suas senhas
         //login.mostrarUser();
-        System.out.println(estoque.numProdutos());
+        
+        //Numero de produtos em estoque
+        //System.out.println("Produtos em estoque: "+estoque.control());
+
         Caixa caixa = new Caixa(operador1, "default", login);
         estoque.produtoDados("Maca grande");
 

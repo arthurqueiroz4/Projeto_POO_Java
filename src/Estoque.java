@@ -5,9 +5,6 @@ public class Estoque {
     Estoque(){
         System.out.println("Estoque aberto");
     }
-    public String numProdutos(){
-        return "Produtos em estoque: "+ produtos.size();
-    }
     public int control(){
         return produtos.size();
     }
