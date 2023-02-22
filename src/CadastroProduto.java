@@ -7,7 +7,7 @@ public class CadastroProduto {;
         this.nomeProduto = nomeProduto;
         this.precoUnitario = precoUnitario;
         this.codigoBarra = codigoBarra;
-        estoque.produtos.add(0, nomeProduto);
+        estoque.produtos.add(this);
     }
     
     public double getPrecoUnitario(){

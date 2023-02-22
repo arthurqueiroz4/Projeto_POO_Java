@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 public class Estoque {
-    List<String> produtos = new ArrayList<>();
+    List<CadastroProduto> produtos = new ArrayList<>();
     Estoque(){
         System.out.println("Estoque aberto");
     }
@@ -11,20 +11,32 @@ public class Estoque {
     public int control(){
         return produtos.size();
     }
-    //string para classe cadastroProduto
-    public void produtoDados(List<CadastroProduto> Produto, String nomeProduto){
-        for(int x = 0; x < control(); x++){
-            if(nomeProduto == Produto.get(x).getNomeProduto()){
-               if(produtos.contains(Produto.get(x).getNomeProduto())){
-                    System.out.println("Dados do produto " + Produto.get(x).getNomeProduto() + ":");
-                    System.out.println("-Preço unitário: " + Produto.get(x).getPrecoUnitario() + " R$");
-                    System.out.println("-Codigo de barras: " + Produto.get(x).getCodigoBarra());
-                } 
+    public boolean contemProduto(String nomeProduto){
+        boolean itsIn = false;
+        for (int i = 0; i < control(); i++) {
+            if(produtos.get(i).getNomeProduto() == nomeProduto){
+                itsIn = true;
+            } else {
+                itsIn = false;
             }
         }
-        if(produtos.contains(nomeProduto) == false){
-            System.out.println("produto não cadastrado!");
+        return itsIn;
+    }
+    //string para classe cadastroProduto
+    public boolean produtoDados(String nomeProduto){
+        if(!contemProduto(nomeProduto)){
+            System.out.println("produto nao cadastrado!");
+            return false;
+        }
+        for(int x = 0; x < control(); x++){
+                System.out.println("Dados do produto " + produtos.get(x).getNomeProduto() + ":");
+                System.out.println("\tPreço unitário:  R$ " + produtos.get(x).getPrecoUnitario());
+                System.out.println("\tCodigo de barras: " + produtos.get(x).getCodigoBarra());
+                } 
+        return true;
+        }
+            // if(nomeProduto == produtos.get(x).getNomeProduto()){
+               
+            // }
         }
         
-    }
-}

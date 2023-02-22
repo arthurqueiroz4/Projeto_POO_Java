@@ -8,11 +8,11 @@ public class Principal {
         Login login = new Login();
         Estoque estoque = new Estoque();
 
-        List<CadastroProduto> produtos = new ArrayList<CadastroProduto>();
-        produtos.add(new CadastroProduto("Acucar", 2.50, "123456", estoque));
-        produtos.add(new CadastroProduto("Maca", 1.50, "123436", estoque));
-        produtos.add(new CadastroProduto("Maca grande", 3.50, "123436", estoque));
-
+        //List<CadastroProduto> produtos = new ArrayList<CadastroProduto>();
+        CadastroProduto produto1 = new CadastroProduto("Acucar", 2.50, "123456", estoque);
+        CadastroProduto produto2 = new CadastroProduto("Maca", 1.50, "123436", estoque);
+        CadastroProduto produto3 = new CadastroProduto("Maca grande", 3.50, "123436", estoque);
+        
         Funcionario operador1 = new Funcionario("Jose", "000.000.000-00", 1201, financeiro, login);
         Funcionario operador2 = new Funcionario("Maria", "000.000.000-01", 1220, financeiro, login);
         Funcionario operador3 = new Funcionario("Arthur", "000.000.000-02", 1250, financeiro, login);
@@ -37,8 +37,9 @@ public class Principal {
         //login.mostrarUser();
         System.out.println(estoque.numProdutos());
         Caixa caixa = new Caixa(operador1, "default", login);
+        estoque.produtoDados("Maca grande");
+
         
-        estoque.produtoDados(produtos, "Maca grande");
     }   
 }   
     
