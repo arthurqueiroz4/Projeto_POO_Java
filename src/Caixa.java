@@ -1,7 +1,10 @@
+import java.util.List;
+import java.util.ArrayList;
 public class Caixa extends Estoque{
     private static boolean isOpen=false;
     private Funcionario funcionario;
-    
+    List<Double> produtosClientes = new ArrayList<Double>();
+
     Caixa(Funcionario funcionario, String senha, Login login){
         if(login.validaLogin(funcionario.getNome(), senha)){
             isOpen = true;
@@ -12,12 +15,16 @@ public class Caixa extends Estoque{
         }
     }
     public void caixaEstoque(String codigoBarra, Estoque estoque){
-        for(int i=0;;i++){
-            if (estoque.produtos.get(i).getCodigoBarra() == codigoBarra){
-                
+        double valor = 0;
+        for(int i=0;i < estoque.control();i++){
+            if (estoque.produtosClientes.get(i).getCodigoBarra() == codigoBarra){
+                produtosClientes.add(estoque.produtosClientes.get(i).getPrecoUnitario());
             }
-            System.out.println(estoque.produtos.get(0));
         } 
+        for(int i= 0; i < produtosClientes.size(); i++){
+            valor += produtosClientes.get(i);
+        }
+        System.out.println("SUBTOTAL: " + valor);
         
     }
 }

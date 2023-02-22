@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Principal {
     public static void main(String[] args) {
         //Interface x =new Interface();
@@ -9,9 +6,9 @@ public class Principal {
         Estoque estoque = new Estoque();
 
         //List<CadastroProduto> produtos = new ArrayList<CadastroProduto>();
-        CadastroProduto produto1 = new CadastroProduto("Acucar", 2.50, "123456", estoque);
+        CadastroProduto produto1 = new CadastroProduto("Acucar", 2.50, "12346", estoque);
         CadastroProduto produto2 = new CadastroProduto("Maca", 1.50, "123436", estoque);
-        CadastroProduto produto3 = new CadastroProduto("Maca grande", 3.50, "123436", estoque);
+        CadastroProduto produto3 = new CadastroProduto("Maca grande", 3.50, "123476", estoque);
         
         Funcionario operador1 = new Funcionario("Jose", "000.000.000-00", 1201, financeiro, login);
         Funcionario operador2 = new Funcionario("Maria", "000.000.000-01", 1220, financeiro, login);
@@ -42,7 +39,10 @@ public class Principal {
 
         Caixa caixa = new Caixa(operador1, "default", login);
         estoque.produtoDados("Maca grande");
-
+        //produto lido pelo caixa
+        caixa.caixaEstoque("123476", estoque);
+        caixa.caixaEstoque("123436", estoque);
+        caixa.caixaEstoque("12346", estoque);
         
     }   
 }   

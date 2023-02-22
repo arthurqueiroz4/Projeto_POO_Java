@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 public class Estoque {
-    List<CadastroProduto> produtos = new ArrayList<>();
+    List<CadastroProduto> produtosClientes = new ArrayList<>();
     Estoque(){
         System.out.println("Estoque aberto");
     }
     public int control(){
-        return produtos.size();
+        return produtosClientes.size();
     }
     public boolean contemProduto(String nomeProduto){
         boolean itsIn = false;
         for (int i = 0; i < control(); i++) {
-            if(produtos.get(i).getNomeProduto() == nomeProduto){
+            if(produtosClientes.get(i).getNomeProduto() == nomeProduto){
                 itsIn = true;
             } else {
                 itsIn = false;
@@ -26,14 +26,16 @@ public class Estoque {
             return false;
         }
         for(int x = 0; x < control(); x++){
-                System.out.println("Dados do produto " + produtos.get(x).getNomeProduto() + ":");
-                System.out.println("\tPreço unitário:  R$ " + produtos.get(x).getPrecoUnitario());
-                System.out.println("\tCodigo de barras: " + produtos.get(x).getCodigoBarra());
-                } 
+            if(nomeProduto == produtosClientes.get(x).getNomeProduto()){
+                System.out.println("Dados do produto " + produtosClientes.get(x).getNomeProduto() + ":");
+                System.out.println(" -Preço unitário:  R$ " + produtosClientes.get(x).getPrecoUnitario());
+                System.out.println(" -Codigo de barras: " + produtosClientes.get(x).getCodigoBarra());
+            } 
+        } 
         return true;
-        }
+    }
             // if(nomeProduto == produtos.get(x).getNomeProduto()){
                
             // }
-        }
+}
         
