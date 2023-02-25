@@ -1,9 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Financeiro {
-    private double totalProduto;
-    private double totalDiario;
+    private static double totalVendido;
     public static double folhaPagamento=0;
     private static String[][] funcionarios = new String[100][3];
-
+    
+     Financeiro(){
+         System.out.println("Financeiro aberto");
+     }
     public void adicionarFuncionario(Funcionario funcionario){
         preencherFuncionarios(funcionario);
         folhaPagamento += funcionario.getSalario();
@@ -23,4 +28,13 @@ public class Financeiro {
         return "Folha de pagamento: "+folhaPagamento;
     }
     
+    public void totalCaixa(double valorCaixa){
+        totalVendido += valorCaixa;
+    }
+
+    public void faturamento(){
+        System.out.println("Faturamento: "+ totalVendido);
+    }
+
+
 }
