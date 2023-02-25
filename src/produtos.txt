@@ -1,0 +1,10 @@
+Arroz integral, 5.50, 7891234567890, 5
+Shampoo 2 em 1, 12.99, 7894561237890, 10
+Batatas, 2.99, 1234567890123, 10
+Sabonete líquido, 7.50, 2345678901234, 3
+Coca-cola, 4.99, 3456789012345, 10
+Queijo mussarela, 15.99, 4567890123456, 2
+Sabão em pó, 8.50, 5678901234567, 6
+Abacaxi, 3.99, 6789012345678, 7
+Cerveja artesanal, 19.99, 7890123456789, 1
+Chocolate ao leite, 3.00, 8901234567890, 8

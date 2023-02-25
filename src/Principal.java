@@ -1,15 +1,38 @@
+import java.util.List;
+import java.io.*;
+import java.util.ArrayList;
 public class Principal {
     public static void main(String[] args) {
         //Interface x =new Interface();
         Financeiro financeiro = new Financeiro();
         Login login = new Login();
         Estoque estoque = new Estoque();
-
-        //List<CadastroProduto> produtos = new ArrayList<CadastroProduto>();
-        CadastroProduto produto1 = new CadastroProduto("Acucar", 2.50, "1", estoque,1);
-        CadastroProduto produto2 = new CadastroProduto("Maca", 1.50, "2", estoque, 1);
-        CadastroProduto produto3 = new CadastroProduto("Maca grande", 3.50, "3", estoque, 1);
         
+        //pegar os dados dentro de um arquivo e colocar em nomeProduto, precoUnitario, codigoBarra e quantidade
+        List<String> linha = new ArrayList<String>();
+        File diretorio = new File("src"); 
+        File arquivo = new File(diretorio, "produtos.txt");
+        //teste caso queira saber se o arquivo existe
+        //boolean existe = arquivo.exists();
+        //System.out.println(existe);
+        try {
+            FileReader fr = new FileReader(arquivo);
+            BufferedReader br = new BufferedReader( fr );
+            while(br.ready()){
+                String linha1 = br.readLine();
+                linha.add(linha1);
+            }
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+        
+        for (int i = 0; i <linha.size(); i++) {
+            String[] row= linha.get(i).split(", ");
+            
+            new CadastroProduto(row[0], Double.parseDouble(row[1]), row[2], estoque,Integer.parseInt(row[3]));
+            
+        }
+            
         Funcionario operador1 = new Funcionario("Jose", "000.000.000-00", 1201, financeiro, login);
         Funcionario operador2 = new Funcionario("Maria", "000.000.000-01", 1220, financeiro, login);
         Funcionario operador3 = new Funcionario("Arthur", "000.000.000-02", 1250, financeiro, login);
@@ -23,13 +46,6 @@ public class Principal {
         
         //Dados dos Funcionarios:
         //financeiro.dadosFolhaPagamento();
-        
-        //Valida login
-        // if(login.validaLogin("Arthur", "default")){
-        //     System.out.println("Login Aceito");
-        // } else {
-        //     System.out.println("Login negado");
-        // }
 
         //Mostra todos os usuarios cadastrados e suas senhas
         //login.mostrarUser();
@@ -37,26 +53,36 @@ public class Principal {
         //Numero de produtos em estoque
         //System.out.println("Produtos em estoque: "+estoque.control());
 
-        Caixa caixa = new Caixa(operador1, "default", login);
+        
         
         //Mostra dados do produto
-        estoque.produtoDados("1");
-
-        //produto lido pelo caixa
-        caixa.caixaEstoque("1", estoque);
-        caixa.caixaEstoque("2", estoque);
-        caixa.caixaEstoque("3", estoque);
-
-        caixa.fecharCaixa(financeiro, estoque);
-        financeiro.faturamento();
+        //estoque.produtoDados("7891234567890");
         
-        caixa.abrirCaixa(operador4, "default", login);
-        caixa.caixaEstoque("1", estoque);
-        caixa.caixaEstoque("2", estoque);
-        caixa.caixaEstoque("3", estoque);
+        //produto lido pelo caixa
+        
+        System.out.println("/////////////////////////////////////////////");
+        Caixa caixa = new Caixa(operador1, "default", login);
 
+        caixa.vendaProdutos("7891234567890", estoque);
+        caixa.vendaProdutos("7890123456789", estoque);
+        caixa.vendaProdutos("6789012345678", estoque);
+        caixa.vendaProdutos("6789012345678", estoque);
+        
         caixa.fecharCaixa(financeiro, estoque);
         financeiro.faturamento();
+        System.out.println("/////////////////////////////////////////////");
+        
+        Caixa caixa1 = new Caixa(operador4, "default", login);
+       
+        caixa1.vendaProdutos("4567890123456", estoque);
+        caixa1.vendaProdutos("4567890123456", estoque);
+        caixa1.vendaProdutos("7890123456789", estoque);
+
+        caixa1.fecharCaixa(financeiro, estoque);
+        financeiro.faturamento();
+        System.out.println("////////////////////////////////////////////");
+        
+    
     }   
 }   
     

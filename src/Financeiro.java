@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
+import java.math.*;
 public class Financeiro {
     private static double totalVendido;
     public static double folhaPagamento=0;
@@ -33,7 +31,8 @@ public class Financeiro {
     }
 
     public void faturamento(){
-        System.out.println("Faturamento: "+ totalVendido);
+        BigDecimal valorEditado = new BigDecimal(totalVendido).setScale(2, RoundingMode.HALF_EVEN);
+        System.out.println("Faturamento: " + valorEditado);
     }
 
 

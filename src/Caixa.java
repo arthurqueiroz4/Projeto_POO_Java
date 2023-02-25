@@ -1,5 +1,8 @@
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.math.*;
 public class Caixa {
     private static boolean isOpen;
     private static double valor;
@@ -7,6 +10,7 @@ public class Caixa {
     List<Double> produtosClientes = new ArrayList<Double>();
 
     Caixa(Funcionario funcionario, String senha, Login login){
+        valor = 0;
         if(login.validaLogin(funcionario.getNome(), senha)){
             isOpen = true;
             System.out.println("Caixa aberto");
@@ -15,52 +19,30 @@ public class Caixa {
             System.out.println("Caixa fechado");
         }
     }
-    public void caixaEstoque(String codigoBarra, Estoque estoque){
-        //System.out.println(estoque.contemProduto(codigoBarra));
+    public void vendaProdutos(String codigoBarra, Estoque estoque){
+        
         valor = 0;
+        boolean esgotado = false;
         for(int i=0;i < estoque.control();i++){
-            if (estoque.produtosEstoque.get(i).getCodigoBarra() == codigoBarra){
+            if (codigoBarra.equals(estoque.produtosEstoque.get(i).getCodigoBarra())){
                 if (estoque.produtosEstoque.get(i).getQuantidade()>0){
                     produtosClientesBarra.add(estoque.produtosEstoque.get(i).getCodigoBarra());
                     produtosClientes.add(estoque.produtosEstoque.get(i).getPrecoUnitario());
                     estoque.produtosEstoque.get(i).setQuantidade(estoque.produtosEstoque.get(i).getQuantidade() - 1);
                 } else {
                     System.out.println("Produto esgotado.");
-                    return;
+                    esgotado = true;  
                 }
             }
         } 
         for(int i= 0; i < produtosClientes.size(); i++){
             valor += produtosClientes.get(i);
         }
-        System.out.println("SUBTOTAL: " + valor);
-        //total += valor;        
-    }
-
-    // public void caixaEstoque(String codigoBarra, Estoque estoque){
-    //     if (estoque.contemProduto(codigoBarra)){
-    //         produtosClientes.add(codigoBarra);
-    //         System.out.println(produtosClientes.size());
-    //         this.subtotal(codigoBarra, estoque);
-    //     } else {
-    //         System.out.println("Sem estoque.");
-    //     }
         
-    // }
-
-    // public void subtotal(String codigoBarra, Estoque estoque){
-    //     for(int i=0;i<estoque.control();i++){
-    //         //System.out.println(super.produtosEstoque.size());
-    //         if (estoque.produtosEstoque.get(i).getCodigoBarra() == codigoBarra){
-    //             valor += estoque.produtosEstoque.get(i).getPrecoUnitario();
-    //             System.out.println("Subtotal = "+valor);
-    //         }
-    //     }
-    // }
-
-    public void abrirCaixa(Funcionario funcionario, String senha, Login login){
-        valor=0;
-        new Caixa(funcionario, senha, login);
+        if(!esgotado){
+            BigDecimal valorEditado = new BigDecimal(valor).setScale(2, RoundingMode.HALF_EVEN);
+            System.out.println("SUBTOTAL: " + valorEditado);
+        }          
     }
 
     public void fecharCaixa(Financeiro financeiro, Estoque estoque){
@@ -71,16 +53,35 @@ public class Caixa {
         System.out.println("Caixa fechado.");
         produtosClientes.clear();
         produtosClientesBarra.clear();
-        System.out.println("Preço a pagar: "+valor);
-        valor = 0;
     }
 
     public void notaFiscal(Estoque estoque){
-        //List<CadastroProduto> notaFiscal = new ArrayList<>();
+        BigDecimal valorEditado = new BigDecimal(valor).setScale(2, RoundingMode.HALF_EVEN);
+        System.out.println();
         System.out.println("Nota fiscal: ");
+        Map<String, Integer> ocorrencias = new HashMap<>();
         for (int i = 0; i < produtosClientesBarra.size(); i++) {
-            System.out.println("Produto ---> "+ estoque.getNome(produtosClientesBarra.get(i)));
-            System.out.println("\tPreço: "+estoque.getPreco(produtosClientesBarra.get(i)));
+            String elemento = produtosClientesBarra.get(i);
+            //caso a ocorrencia exista na lista o valor é adicionado +1, caso n contenha, recebe 1
+            if (ocorrencias.containsKey(elemento)) {
+                ocorrencias.put(elemento, ocorrencias.get(elemento) + 1);
+            } else {
+                ocorrencias.put(elemento, 1);
+            }
         }
+        // para cada chave há um valor de ocorrencia, então é possível realizar a informação de dados por aqui
+        for (String chave : ocorrencias.keySet()) {
+            int valor = ocorrencias.get(chave);
+            if(valor == 1){
+                System.out.println("Produto ---> " + estoque.getNome(chave));
+                System.out.println("\tPreço: " + estoque.getPreco(chave));
+            }else{
+                System.out.println("Produto ---> " + estoque.getNome(chave) + " x" + valor);
+                System.out.println("\tPreço: " + estoque.getPreco(chave) * valor);
+            }
+        }
+        System.out.println();
+        System.out.println("Preço a pagar: "+ valorEditado);
+        System.out.println();
     }
 }
